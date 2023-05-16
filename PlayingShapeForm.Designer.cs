@@ -62,6 +62,7 @@
             GridShape.RowTemplate.Height = 25;
             GridShape.Size = new Size(934, 751);
             GridShape.TabIndex = 0;
+            GridShape.CellPainting += GridShape_CellPainting;
             // 
             // PlayingShapeForm
             // 
