@@ -1,6 +1,6 @@
 ﻿namespace ChessWF
 {
-    partial class PlayingShapeForm
+    partial class GameBoardForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,10 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            components = new System.ComponentModel.Container();
+            TimerForm = new System.Windows.Forms.Timer(components);
             GridShape = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)GridShape).BeginInit();
             SuspendLayout();
+            // 
+            // TimerForm
+            // 
+            TimerForm.Enabled = true;
+            TimerForm.Interval = 30;
             // 
             // GridShape
             // 
@@ -44,14 +50,6 @@
             GridShape.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             GridShape.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             GridShape.ColumnHeadersVisible = false;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.RosyBrown;
-            dataGridViewCellStyle1.Font = new Font("Palatino Linotype", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.MenuHighlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            GridShape.DefaultCellStyle = dataGridViewCellStyle1;
             GridShape.Dock = DockStyle.Fill;
             GridShape.EditMode = DataGridViewEditMode.EditProgrammatically;
             GridShape.Location = new Point(5, 5);
@@ -60,28 +58,29 @@
             GridShape.Name = "GridShape";
             GridShape.RowHeadersVisible = false;
             GridShape.RowTemplate.Height = 25;
-            GridShape.Size = new Size(934, 751);
-            GridShape.TabIndex = 0;
-            GridShape.CellPainting += GridShape_CellPainting;
+            GridShape.Size = new Size(959, 750);
+            GridShape.TabIndex = 2;
+            GridShape.CellClick += GridShape_CellClick;
             // 
-            // PlayingShapeForm
+            // GameBoardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(944, 761);
+            ClientSize = new Size(969, 760);
             Controls.Add(GridShape);
-            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
             HelpButton = true;
-            Name = "PlayingShapeForm";
+            Name = "GameBoardForm";
             Padding = new Padding(5);
-            Text = "PlayingShapeForm";
+            Text = "GameBoard";
             Load += Form_Load;
+            Resize += GameBoardForm_Resize;
             ((System.ComponentModel.ISupportInitialize)GridShape).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
+        private System.Windows.Forms.Timer TimerForm;
         private DataGridView GridShape;
     }
 }

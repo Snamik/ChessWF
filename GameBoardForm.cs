@@ -1,16 +1,27 @@
+using System.Drawing;
+using System.Reflection.Emit;
+using System.Windows.Forms;
+using ChessWF.Pieces;
+
 namespace ChessWF;
 
-public partial class PlayingShapeForm : Form
+public partial class GameBoardForm : Form
 {
     private const int ColumnCount = 10;
     private const int RowCount = 10;
     private const int SizeInfoFied = 25;
+
     private const string MakerFieldText = "abcdefgh";
     private const string MakerFieldNumber = "87654321";
 
-    public PlayingShapeForm()
+    private Dictionary<Point, ChessPieceCell> BoardCells;
+
+    public GameBoardForm()
     {
+        BoardCells = new Dictionary<Point, ChessPieceCell>();
+
         InitializeComponent();
+
     }
 
     private void SetSizeGrid()
@@ -54,6 +65,20 @@ public partial class PlayingShapeForm : Form
             for (var y = 1; y < RowCount - 1; y++)
             {
                 GridShape[x, y].Style = y % 2 == module ? cellStyleBlack : cellStyleWhite;
+
+                ChessPieceCell cell;
+
+                if (y == 2)
+                {
+                    var pawn = new Pawn(GridShape, Side.Black, Resource.BPawn, BoardCells);
+                    cell = new ChessPieceCell(GridShape, new Point(x, y), TimerForm, pawn);
+                }
+                else
+                {
+                    cell = new ChessPieceCell(GridShape, new Point(x, y), TimerForm);
+                }
+
+                BoardCells.Add(new Point(x, y), cell);
             }
         }
     }
@@ -75,10 +100,26 @@ public partial class PlayingShapeForm : Form
     private void Form_Load(object sender, EventArgs e)
     {
         GridShape.ScrollBars = ScrollBars.None;
+        GridShape.DefaultCellStyle = new DataGridViewCellStyle
+        {
+            Alignment = DataGridViewContentAlignment.MiddleCenter,
+            BackColor = Color.DarkGray,
+            Font = new Font("Palatino Linotype", 12F, FontStyle.Bold, GraphicsUnit.Point),
+            ForeColor = SystemColors.ControlText,
+            SelectionBackColor = SystemColors.MenuHighlight,
+            SelectionForeColor = SystemColors.HighlightText,
+            WrapMode = DataGridViewTriState.False
+        };
 
         for (var i = 0; i < ColumnCount; i++)
         {
-            GridShape.Columns.Add(new DataGridViewColumn(cellTemplate: new DataGridViewTextBoxCell()));
+            var column = new DataGridViewColumn(cellTemplate: new DataGridViewTextBoxCell())
+            {
+                CellTemplate = new DataGridViewTextBoxCell(),
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            };
+
+            GridShape.Columns.Add(column);
         }
 
         for (var i = 0; i < RowCount; i++)
@@ -86,32 +127,20 @@ public partial class PlayingShapeForm : Form
             GridShape.Rows.Add();
         }
 
-        GridShape.DefaultCellStyle.SelectionBackColor = Color.FromArgb(254, Color.Aqua);
-        GridShape.DefaultCellStyle.SelectionForeColor = Color.FromArgb(254, Color.Aqua);
-
-
         SetSizeGrid();
-        SetColor(Color.DarkGoldenrod, Color.Bisque);
+        SetColor(Tools.BColor, Tools.WColor);
         SetSymbols();
+
+        GridShape.ClearSelection();
     }
 
-    private void GridShape_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+    private void GameBoardForm_Resize(object sender, EventArgs e)
     {
-        var thickness = 10;
+        Tools.UpdateSizeGameBoard();
+    }
 
-        if (!(e.ColumnIndex > -1 & e.RowIndex > -1)) return;
-
-        // Skip marker field
-        if (e.ColumnIndex is 0 or ColumnCount - 1) return;
-        if (e.RowIndex is 0 or RowCount - 1) return;
-
-        using var selectedPen = new Pen(Color.CornflowerBlue, thickness);
-
-        if (this.GridShape[e.ColumnIndex, e.RowIndex].Selected)
-        {
-            e.Graphics.DrawRectangle(selectedPen, new Rectangle(
-                e.CellBounds.Left + thickness / 2, e.CellBounds.Top + thickness / 2,
-                e.CellBounds.Width - thickness, e.CellBounds.Height - thickness));
-        }
+    private void GridShape_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        GridShape[e.ColumnIndex, e.RowIndex].Selected = false;
     }
 }
