@@ -1,56 +1,78 @@
-﻿using Timer = System.Windows.Forms.Timer;
+﻿using ChessWF.Common;
+using ChessWF.Control;
 
 namespace ChessWF.Pieces;
 
-public class Pawn : IСhessPieces
+public class Pawn : BasePieces, IСhessPiece
 {
-    public DataGridView GridShape { get; set; }
-    public Dictionary<Point, ChessPieceCell> BoardCells { get; set; }
-    public Side Side { get; set; }
     public Image Image { get; set; }
 
-    public Pawn(DataGridView gridShape, Side side, Image image, Dictionary<Point, ChessPieceCell> boardCells)
+    public Pawn(GameBoard gameBoard, Side side, Image image) 
     {
-        GridShape = gridShape;
-        Side = side;
         Image = image;
-        BoardCells = boardCells;
-    }
-
-    public bool CheckPointOnPossibleMove(Point location)
-    {
-        return true;
+        СhessPieces = this;
+        GameBoard = gameBoard;
+        BoardCells = gameBoard.BoardCells;
+        Side = side;
     }
 
     public List<Point> GetPointsOnPossibleMove(Point location)
     {
-        if (Side == Side.Black && location.Y == 2)
+        if (Side == Side.Black)
         {
+            if (location.Y == 2) 
+                return new List<Point>
+                {
+                    location with { Y = location.Y + 1 }, 
+                    location with { Y = location.Y + 2 }
+                };
+
             return new List<Point>
             {
-                new(location.X, location.Y + 1), 
-                new(location.X, location.Y + 2)
+                location with { Y = location.Y + 1 },
             };
         }
 
+        if (location.Y == 7)
+            return new List<Point>
+            {
+                location with { Y = location.Y - 1 },
+                location with { Y = location.Y - 2 }
+            };
+
         return new List<Point>
         {
-            new(location.X, location.Y + 1),
+            location with { Y = location.Y - 1 },
         };
     }
 
-    public List<Point> GetPointsOnWay(Point locationStart, Point locationEnd)
+    public override List<Point> GetPointsOnWay(Point locationStart, Point locationEnd)
     {
-        throw new NotImplementedException();
-    }
+        var points = new List<Point>();
 
-    public void SetNewLocation(Point point)
-    {
-        if (!BoardCells.ContainsKey(point))
-            throw new ArgumentOutOfRangeException(BoardCells.ToString(), @"GameBoard is not contains " + point);
+        if (Side == Side.Black)
+        {
+            var point = new Point(locationStart.X, locationStart.Y + 1);
+            points.Add(point);
 
-        var cell = BoardCells[point];
-        cell.СhessPieces = this;
-        cell.DrawChessPiece();
+            while (point.Y < locationEnd.Y)
+            {
+                point = new Point(point.X, point.Y + 1);
+                points.Add(point);
+            } 
+        }
+        else
+        {
+            var point = new Point(locationStart.X, locationStart.Y - 1);
+            points.Add(point);
+
+            while (point.Y > locationEnd.Y)
+            {
+                point = new Point(point.X, point.Y - 1);
+                points.Add(point);
+            }
+        }
+
+        return points;
     }
 }

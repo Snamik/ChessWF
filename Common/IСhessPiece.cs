@@ -1,16 +1,14 @@
-﻿namespace ChessWF.Pieces;
+﻿using ChessWF.Control;
 
-public interface IСhessPieces
+namespace ChessWF.Common;
+
+public interface IСhessPiece
 {
-    public DataGridView GridShape { get; set; }
-
-    public Dictionary<Point, ChessPieceCell> BoardCells { get; set; }
+    public GameBoard? GameBoard { get; set; }
 
     public Side Side { get; set; }
 
     public Image Image { get; set; }
-
-    public bool CheckPointOnPossibleMove(Point location);
 
     public List<Point> GetPointsOnPossibleMove(Point location);
 

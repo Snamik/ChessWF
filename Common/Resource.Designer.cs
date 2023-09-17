@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChessWF.Pieces {
+namespace ChessWF.Common {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ChessWF.Pieces {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ChessWF.Pieces.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ChessWF.Common.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,19 +63,9 @@ namespace ChessWF.Pieces {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BElephant {
+        internal static System.Drawing.Bitmap BBishop {
             get {
-                object obj = ResourceManager.GetObject("BElephant", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap BHorse {
-            get {
-                object obj = ResourceManager.GetObject("BHorse", resourceCulture);
+                object obj = ResourceManager.GetObject("BBishop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +76,16 @@ namespace ChessWF.Pieces {
         internal static System.Drawing.Bitmap BKing {
             get {
                 object obj = ResourceManager.GetObject("BKing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BLKnight {
+            get {
+                object obj = ResourceManager.GetObject("BLKnight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,6 +113,16 @@ namespace ChessWF.Pieces {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BRKnight {
+            get {
+                object obj = ResourceManager.GetObject("BRKnight", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap BRook {
             get {
                 object obj = ResourceManager.GetObject("BRook", resourceCulture);
@@ -123,19 +133,9 @@ namespace ChessWF.Pieces {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap WElephant {
+        internal static System.Drawing.Bitmap WBishop {
             get {
-                object obj = ResourceManager.GetObject("WElephant", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WHorse {
-            get {
-                object obj = ResourceManager.GetObject("WHorse", resourceCulture);
+                object obj = ResourceManager.GetObject("WBishop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +146,16 @@ namespace ChessWF.Pieces {
         internal static System.Drawing.Bitmap WKing {
             get {
                 object obj = ResourceManager.GetObject("WKing", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WLKnight {
+            get {
+                object obj = ResourceManager.GetObject("WLKnight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +176,16 @@ namespace ChessWF.Pieces {
         internal static System.Drawing.Bitmap WQueen {
             get {
                 object obj = ResourceManager.GetObject("WQueen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WRKnight {
+            get {
+                object obj = ResourceManager.GetObject("WRKnight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

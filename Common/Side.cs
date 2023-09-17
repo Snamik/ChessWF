@@ -1,4 +1,4 @@
-﻿namespace ChessWF.Pieces;
+﻿namespace ChessWF.Common;
 
 public enum Side
 {
